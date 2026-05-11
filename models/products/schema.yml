@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+    - name: products
+      description: "products details"
+      columns:
+          - name: product_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
