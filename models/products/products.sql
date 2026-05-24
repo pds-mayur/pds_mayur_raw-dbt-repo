@@ -6,7 +6,7 @@ WITH source_data AS (
 cleaned_products AS (
     SELECT
         product_id,
-        TRIM(productName) AS product_name,
+        TRIM(product_name) AS product_name,
         UPPER(category) AS category,
         INITCAP(brand) AS brand,
         CAST(unit_price AS NUMBER(10,2)) AS unit_price,
