@@ -1,4 +1,4 @@
-WITH source_data AS (
+WITH PRODUCT_NAME AS (
     SELECT *
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
@@ -13,7 +13,7 @@ cleaned_products AS (
         CAST(launch_date AS DATE) AS launch_date,
         CURRENT_TIMESTAMP() AS loaded_at
 
-    FROM source_data
+    FROM PRODUCT_NAME
 )
 
 SELECT *
