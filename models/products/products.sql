@@ -1,7 +1,7 @@
--- dbt / Snowflake relation not found error
+-- dbt / Snowflake runtime error: division by zero
 WITH source_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS_MISSING
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
 cleaned_products AS (
@@ -12,7 +12,7 @@ cleaned_products AS (
         INITCAP(brand) AS brand,
         CAST(unit_price AS NUMBER(10,2)) AS unit_price,
         CAST(launch_date AS DATE) AS launch_date,
-        CURRENT_TIMESTAMP() AS loaded_at
+        1 / 0 AS loaded_at
     FROM source_data
 )
 
