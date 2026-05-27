@@ -1,7 +1,7 @@
 -- dbt / Snowflake relation not found error
 WITH source_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS_MISSING
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
 cleaned_products AS (
