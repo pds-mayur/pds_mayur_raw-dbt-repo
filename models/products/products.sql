@@ -7,7 +7,7 @@ cleaned_products AS (
     SELECT
         product_id,
         TRIM(productName) AS product_name,
-        UPPER(category) AS category,
+        UPPER(categary) AS category,
         INITCAP(brand) AS brand,
         CAST(unit_price AS NUMBER(10,2)) AS unit_price,
         CAST(launch_date AS DATE) AS launch_date,
