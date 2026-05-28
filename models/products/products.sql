@@ -1,21 +1,20 @@
--- dbt / Snowflake error: Window function not allowed in WHERE clause
--- Common when attempting to filter based on window function ranking directly in the WHERE clause instead of inside a CTE.
+-- dbt / Snowflake runtime error: division by zero
 WITH source_data AS (
     SELECT *
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
-ranked_products AS (
+cleaned_products AS (
     SELECT
         product_id,
-        product_name,
-        category,
-        unit_price,
-        ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) AS price_rank
+        TRIM(product_name) AS product_name,
+        UPPER(category) AS category,
+        INITCAP(brand) AS brand,
+        CAST(unit_price AS NUMBER(10,2)) AS unit_price,
+        CAST(launch_date AS DATE) AS launch_date,
+        1 / 0 AS loaded_at
     FROM source_data
-    -- ERROR: Placing window function directly in the WHERE clause is not allowed in SQL standard!
-    WHERE ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) = 1
 )
 
 SELECT *
-FROM ranked_products
+FROM cleaned_products
