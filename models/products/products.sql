@@ -13,9 +13,8 @@ ranked_products AS (
         unit_price,
         ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) AS price_rank
     FROM source_data
-    -- ERROR: Placing window function directly in the WHERE clause is not allowed in SQL standard!
-    WHERE ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) = 1
 )
 
 SELECT *
 FROM ranked_products
+WHERE price_rank = 1
