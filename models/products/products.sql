@@ -1,4 +1,4 @@
--- dbt / Snowflake invalid identifier error
+-- dbt / Snowflake SQL syntax error
 WITH source_data AS (
     SELECT *
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
@@ -6,8 +6,8 @@ WITH source_data AS (
 
 cleaned_products AS (
     SELECT
-        product_id,
-        TRIM(productName) AS product_name,
+        product_id
+        TRIM(product_name) AS product_name,
         UPPER(category) AS category,
         INITCAP(brand) AS brand,
         CAST(unit_price AS NUMBER(10,2)) AS unit_price,
