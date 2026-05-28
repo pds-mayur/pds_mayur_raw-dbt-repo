@@ -1,20 +1,21 @@
--- dbt / Snowflake error: Not a group by expression
--- Common when aggregating metrics (e.g. SUM, AVG) but forgetting to group by non-aggregated dimensions.
+-- dbt / Snowflake error: Window function not allowed in WHERE clause
+-- Common when attempting to filter based on window function ranking directly in the WHERE clause instead of inside a CTE.
 WITH source_data AS (
     SELECT *
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
-aggregated_products AS (
+ranked_products AS (
     SELECT
+        product_id,
+        product_name,
         category,
-        brand,
-        AVG(unit_price) AS average_price,
-        COUNT(product_id) AS total_products
+        unit_price,
+        ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) AS price_rank
     FROM source_data
-    -- ERROR: Missing 'GROUP BY category, brand' here!
-    -- Trying to mix scalar dimensions with aggregates will fail.
+    -- ERROR: Placing window function directly in the WHERE clause is not allowed in SQL standard!
+    WHERE ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) = 1
 )
 
 SELECT *
-FROM aggregated_products
+FROM ranked_products
