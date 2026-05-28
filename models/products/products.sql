@@ -1,7 +1,7 @@
--- dbt / Snowflake relation not found error
+-- dbt missing ref / unresolved model error
 WITH source_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS_MISSING
+    FROM {{ ref('stg_ok_missing') }}
 ),
 
 cleaned_products AS (
