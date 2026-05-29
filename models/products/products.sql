@@ -6,17 +6,17 @@
 WITH duplicated_customers AS (
 
     SELECT
-        customer_id,
-        FIRST_NAME
-    FROM RAW_DB.RAW_SCHEMA.CUSTOMERS
+        product_id,
+        product_NAME
+    FROM RAW_DB.RAW_SCHEMA.products
 
     UNION ALL
 
     SELECT
-        customer_id,
-        FIRST_NAME
-    FROM RAW_DB.RAW_SCHEMA.CUSTOMERS
+        product_id,
+        product_NAME
+    FROM RAW_DB.RAW_SCHEMA.products
 )
 
 SELECT *
-FROM duplicated_customers
+FROM duplicated_products
