@@ -1,20 +1,22 @@
--- dbt / Snowflake invalid identifier error
-WITH source_data AS (
-    SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
-),
+{{ config(
+    materialized='incremental',
+    unique_key='customer_id'
+) }}
 
-cleaned_products AS (
+WITH duplicated_customers AS (
+
     SELECT
-        product_id,
-        TRIM(productName) AS product_name,
-        UPPER(category) AS category,
-        INITCAP(brand) AS brand,
-        CAST(unit_price AS NUMBER(10,2)) AS unit_price,
-        CAST(launch_date AS DATE) AS launch_date,
-        CURRENT_TIMESTAMP() AS loaded_at
-    FROM source_data
+        customer_id,
+        customer_name
+    FROM RAW_DB.RAW_SCHEMA.CUSTOMERS
+
+    UNION ALL
+
+    SELECT
+        customer_id,
+        customer_name
+    FROM RAW_DB.RAW_SCHEMA.CUSTOMERS
 )
 
 SELECT *
-FROM cleaned_products
+FROM duplicated_customers
