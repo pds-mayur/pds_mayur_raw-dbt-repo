@@ -1,10 +1,12 @@
--- dbt / Snowflake variant cast failure
+-- dbt / Snowflake unsupported subquery
 
-WITH json_data AS (
-
-    SELECT PARSE_JSON('{"price":"abc"}') AS raw_json
+WITH source_data AS (
+    SELECT *
+    FROM RAW_DB.RAW_SCHEMA.ORDERS
 )
 
-SELECT
-    raw_json:price::NUMBER AS price
-FROM json_data
+SELECT *
+FROM source_data s
+WHERE EXISTS (
+    SELECT COUNT(*)
+)
