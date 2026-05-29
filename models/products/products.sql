@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key='customer_id'
+    unique_key='product_id'
 ) }}
 
 WITH duplicated_customers AS (
