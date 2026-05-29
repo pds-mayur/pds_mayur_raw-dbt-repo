@@ -1,22 +1,10 @@
-{{ config(
-    materialized='incremental',
-    unique_key='product_id'
-) }}
+-- dbt / Snowflake variant cast failure
 
-WITH duplicated_customers AS (
+WITH json_data AS (
 
-    SELECT
-        product_id,
-        product_NAME
-    FROM RAW_DB.RAW_SCHEMA.products
-
-    UNION ALL
-
-    SELECT
-        product_id,
-        product_NAME
-    FROM RAW_DB.RAW_SCHEMA.products
+    SELECT PARSE_JSON('{"price":"abc"}') AS raw_json
 )
 
-SELECT *
-FROM duplicated_products
+SELECT
+    raw_json:price::NUMBER AS price
+FROM json_data
