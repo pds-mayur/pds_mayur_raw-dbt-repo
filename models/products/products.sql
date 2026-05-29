@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+-- dbt / Snowflake numeric value not recognized
 
 WITH source_data AS (
     SELECT *
@@ -6,5 +6,5 @@ WITH source_data AS (
 )
 
 SELECT
-    SUM(product_name) AS total
+    CAST(category AS NUMBER) AS category_number
 FROM source_data
