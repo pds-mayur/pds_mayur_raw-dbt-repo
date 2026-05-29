@@ -1,9 +1,19 @@
--- dbt / Snowflake object does not exist
+-- dbt / Snowflake ambiguous column error
 
-WITH source_data AS (
+WITH orders_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS_INVALID
+    FROM RAW_DB.RAW_SCHEMA.ORDER_ITEMS
+),
+
+products_data AS (
+    SELECT *
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 )
 
-SELECT *
-FROM source_data
+SELECT
+    product_id,
+    quantity,
+    product_name
+FROM orders_data od
+JOIN products_data pd
+    ON od.product_id = pd.product_id
