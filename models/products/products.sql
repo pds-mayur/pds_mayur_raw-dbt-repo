@@ -2,7 +2,7 @@
 
 WITH source_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.ORDERS
+    FROM RAW_DB.RAW_SCHEMA.Products
 )
 
 SELECT *
