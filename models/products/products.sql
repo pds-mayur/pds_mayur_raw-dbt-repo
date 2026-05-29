@@ -7,14 +7,14 @@ WITH duplicated_customers AS (
 
     SELECT
         customer_id,
-        customer_name
+        FIRST_NAME
     FROM RAW_DB.RAW_SCHEMA.CUSTOMERS
 
     UNION ALL
 
     SELECT
         customer_id,
-        customer_name
+        FIRST_NAME
     FROM RAW_DB.RAW_SCHEMA.CUSTOMERS
 )
 
