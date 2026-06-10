@@ -7,12 +7,11 @@ WITH source_data AS (
 cleaned_products AS (
     SELECT
         product_id,
-        TRIM(product_name) AS product_name,
+        TRIM(productname) AS product_name,
         UPPER(category) AS category,
         INITCAP(brand) AS brand,
         CAST(unit_price AS NUMBER(10,2)) AS unit_price,
         CAST(launch_date AS DATE) AS launch_date,
-        1 / 0 AS loaded_at
     FROM source_data
 )
 
