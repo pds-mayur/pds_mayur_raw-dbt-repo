@@ -1,12 +1,12 @@
--- dbt / Snowflake relation not found error
+-- dbt / Snowflake SQL syntax error
 WITH source_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS_MISSING
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
 cleaned_products AS (
     SELECT
-        product_id,
+        product_id
         TRIM(product_name) AS product_name,
         UPPER(category) AS category,
         INITCAP(brand) AS brand,
