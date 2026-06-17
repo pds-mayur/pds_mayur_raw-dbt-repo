@@ -12,8 +12,7 @@ aggregated_products AS (
         AVG(unit_price) AS average_price,
         COUNT(product_id) AS total_products
     FROM source_data
-    -- ERROR: Missing 'GROUP BY category, brand' here!
-    -- Trying to mix scalar dimensions with aggregates will fail.
+    GROUP BY category, brand
 )
 
 SELECT *
