@@ -1,20 +1,20 @@
--- dbt / Snowflake runtime error: division by zero
+-- dbt / Snowflake error: Not a group by expression
+-- Common when aggregating metrics (e.g. SUM, AVG) but forgetting to group by non-aggregated dimensions.
 WITH source_data AS (
     SELECT *
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
-cleaned_products AS (
+aggregated_products AS (
     SELECT
-        product_id,
-        TRIM(product_name) AS product_name,
-        UPPER(category) AS category,
-        INITCAP(brand) AS brand,
-        CAST(unit_price AS NUMBER(10,2)) AS unit_price,
-        CAST(launch_date AS DATE) AS launch_date,
-        1 / 0 AS loaded_at
+        category,
+        brand,
+        AVG(unit_price) AS average_price,
+        COUNT(product_id) AS total_products
     FROM source_data
+    -- ERROR: Missing 'GROUP BY category, brand' here!
+    -- Trying to mix scalar dimensions with aggregates will fail.
 )
 
 SELECT *
-FROM cleaned_products
+FROM aggregated_products
