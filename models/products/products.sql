@@ -1,20 +1,20 @@
--- dbt / Snowflake error: Not a group by expression
--- Common when aggregating metrics (e.g. SUM, AVG) but forgetting to group by non-aggregated dimensions.
+-- dbt / Snowflake invalid identifier error
 WITH source_data AS (
     SELECT *
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 ),
 
-aggregated_products AS (
+cleaned_products AS (
     SELECT
-        category,
-        brand,
-        AVG(unit_price) AS average_price,
-        COUNT(product_id) AS total_products
+        product_id,
+        TRIM(productName) AS product_name,
+        UPPER(category) AS category,
+        INITCAP(brand) AS brand,
+        CAST(unit_price AS NUMBER(10,2)) AS unit_price,
+        CAST(launch_date AS DATE) AS launch_date,
+        CURRENT_TIMESTAMP() AS loaded_at
     FROM source_data
-    -- ERROR: Missing 'GROUP BY category, brand' here!
-    -- Trying to mix scalar dimensions with aggregates will fail.
 )
 
 SELECT *
-FROM aggregated_products
+FROM cleaned_products
