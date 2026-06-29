@@ -1,3 +1,25 @@
+# Incident remediation: `7c5a9d3c-8cfa-400d-9a26-c5e83a33f95c`
+
+## RCA summary
+Division by zero in the SQL query.
+
+## Confidence score
+1.0
+
+## Validation
+- Patch scope validated: **True**
+
+### Recommended steps
+- Review patches on draft PR branch
+- Run dbt build --select affected_model
+- Do not auto-merge
+
+## Proposed patches
+
+### Patch 1: `models/products/products.sql`
+_Fix division by zero error by replacing the expression with NULL._
+
+```
 -- dbt / Snowflake runtime error: division by zero
 WITH source_data AS (
     SELECT *
@@ -18,3 +40,4 @@ cleaned_products AS (
 
 SELECT *
 FROM cleaned_products
+```
