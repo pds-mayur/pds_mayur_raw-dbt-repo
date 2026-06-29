@@ -10,7 +10,7 @@ cleaned_products AS (
         TRIM(product_name) AS product_name,
         UPPER(category) AS category,
         INITCAP(brand) AS brand,
-        CAST('NOT_A_NUMBER' AS NUMBER(10,2)) AS unit_price,
+        CAST(0 AS NUMBER(10,2)) AS unit_price,
         CAST(launch_date AS DATE) AS launch_date,
         CURRENT_TIMESTAMP() AS loaded_at
     FROM source_data
