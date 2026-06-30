@@ -9,13 +9,6 @@ WITH duplicated_data AS (
         product_id,
         product_name
     FROM RAW_DB.RAW_SCHEMA.PRODUCTS
-
-    UNION ALL
-
-    SELECT
-        product_id,
-        product_name
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 )
 
 SELECT *
