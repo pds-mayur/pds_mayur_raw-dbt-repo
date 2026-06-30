@@ -12,7 +12,7 @@ cleaned_products AS (
         INITCAP(brand) AS brand,
         CAST(unit_price AS NUMBER(10,2)) AS unit_price,
         CAST(launch_date AS DATE) AS launch_date,
-        1 / 0 AS loaded_at
+        loaded_at AS loaded_at
     FROM source_data
 )
 
