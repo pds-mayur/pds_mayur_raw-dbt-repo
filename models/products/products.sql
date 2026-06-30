@@ -1,22 +1,11 @@
-{{ config(
-    materialized='incremental',
-    unique_key='product_id'
-) }}
+-- dbt / Snowflake null in non-nullable column
 
-WITH duplicated_customers AS (
-
+WITH source_data AS (
     SELECT
-        product_id,
-        product_NAME
-    FROM RAW_DB.RAW_SCHEMA.products
-
-    UNION ALL
-
-    SELECT
-        product_id,
-        product_NAME
-    FROM RAW_DB.RAW_SCHEMA.products
+        NULL AS product_id,
+        product_name
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 )
 
 SELECT *
-FROM duplicated_products
+FROM source_data
