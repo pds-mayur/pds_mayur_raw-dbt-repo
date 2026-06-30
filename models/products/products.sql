@@ -1,11 +1,20 @@
--- dbt / Snowflake null in non-nullable column
-
+-- dbt missing ref / unresolved model error
 WITH source_data AS (
+    SELECT *
+    FROM {{ ref('stg_ok_missing') }}
+),
+
+cleaned_products AS (
     SELECT
-        NULL AS product_id,
-        product_name
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
+        product_id,
+        TRIM(product_name) AS product_name,
+        UPPER(category) AS category,
+        INITCAP(brand) AS brand,
+        CAST(unit_price AS NUMBER(10,2)) AS unit_price,
+        CAST(launch_date AS DATE) AS launch_date,
+        CURRENT_TIMESTAMP() AS loaded_at
+    FROM source_data
 )
 
 SELECT *
-FROM source_data
+FROM cleaned_products
