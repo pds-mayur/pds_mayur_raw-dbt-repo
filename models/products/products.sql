@@ -1,20 +1,22 @@
--- dbt / Snowflake type conversion failure
-WITH source_data AS (
-    SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
-),
+{{ config(
+    materialized='incremental',
+    unique_key='product_id'
+) }}
 
-cleaned_products AS (
+WITH duplicated_data AS (
+
     SELECT
         product_id,
-        TRIM(product_name) AS product_name,
-        UPPER(category) AS category,
-        INITCAP(brand) AS brand,
-        CAST('NOT_A_NUMBER' AS NUMBER(10,2)) AS unit_price,
-        CAST(launch_date AS DATE) AS launch_date,
-        CURRENT_TIMESTAMP() AS loaded_at
-    FROM source_data
+        product_name
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
+
+    UNION ALL
+
+    SELECT
+        product_id,
+        product_name
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 )
 
 SELECT *
-FROM cleaned_products
+FROM duplicated_data
