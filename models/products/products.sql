@@ -1,22 +1,21 @@
-{{ config(
-    materialized='incremental',
-    unique_key='product_id'
-) }}
+-- dbt / Snowflake error: Window function not allowed in WHERE clause
+-- Common when attempting to filter based on window function ranking directly in the WHERE clause instead of inside a CTE.
+WITH source_data AS (
+    SELECT *
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
+),
 
-WITH duplicated_data AS (
-
+ranked_products AS (
     SELECT
         product_id,
-        product_name
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
-
-    UNION ALL
-
-    SELECT
-        product_id,
-        product_name
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
+        product_name,
+        category,
+        unit_price,
+        ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) AS price_rank
+    FROM source_data
+    -- ERROR: Placing window function directly in the WHERE clause is not allowed in SQL standard!
+    WHERE ROW_NUMBER() OVER (PARTITION BY category ORDER BY unit_price DESC) = 1
 )
 
 SELECT *
-FROM duplicated_data
+FROM ranked_products
