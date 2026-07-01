@@ -1,12 +1,5 @@
--- dbt / Snowflake unsupported subquery
-
-WITH source_data AS (
-    SELECT *
-    FROM RAW_DB.RAW_SCHEMA.ORDERS
+SELECT (
+    SELECT product_name
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 )
-
-SELECT *
-FROM source_data s
-WHERE EXISTS (
-    SELECT COUNT(*)
-)
+FROM RAW_DB.RAW_SCHEMA.ORDERS;
