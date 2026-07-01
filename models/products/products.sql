@@ -1,10 +1,12 @@
--- dbt / Snowflake numeric value not recognized
+-- dbt / Snowflake unsupported subquery
 
 WITH source_data AS (
     SELECT *
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
+    FROM RAW_DB.RAW_SCHEMA.ORDERS
 )
 
-SELECT
-    CAST(category AS NUMBER) AS category_number
-FROM source_data
+SELECT *
+FROM source_data s
+WHERE EXISTS (
+    SELECT COUNT(*)
+)
