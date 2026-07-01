@@ -6,5 +6,5 @@ WITH source_data AS (
 )
 
 SELECT
-    CAST(category AS NUMBER) AS category_number
+    category AS category_number
 FROM source_data
