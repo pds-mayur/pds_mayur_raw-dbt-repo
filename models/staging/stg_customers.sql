@@ -1,7 +1,7 @@
 {{ config(materialized='view') }}
 
 select
-    cast(custmer_id as number) as customer_id,  -- intentional typo
+    cast(CUSTOMER_ID as number) as customer_id,  -- intentional typo
     trim(name) as customer_name,
     lower(trim(email)) as email,
     initcap(trim(city)) as city,
