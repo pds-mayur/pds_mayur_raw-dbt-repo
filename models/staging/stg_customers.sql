@@ -1,29 +1,33 @@
--- This file generates a Snowflake SQL compilation error because `customerid`
--- is not a valid column name in `ECOMMERCE_DB.RAW.ORDERS`.
--- The real column is `CUSTOMER_ID`, so Snowflake will usually report
--- `invalid identifier CUSTOMERID`.
+-- This file generates a Snowflake SQL compilation error because `discount_amount`
+-- does not exist in `ECOMMERCE_DB.RAW.ORDER_ITEMS`.
+-- Snowflake will usually report `invalid column name DISCOUNT_AMOUNT`.
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.ORDERS
+    from ECOMMERCE_DB.RAW.ORDER_ITEMS
 )
 
 select
+    order_item_id,
     order_id,
-    customerid as customer_id,
-    order_date,
-    status
+    product_id,
+    quantity,
+    unit_price,
+    line_total,
+    discount_amount
 from source_data
 
 -- Correct SQL:
--- replace the invalid identifier with the real column name from the source.
+-- remove the invalid column, or swap it for a real column that exists in the table.
 -- with source_data as (
 --     select *
---     from ECOMMERCE_DB.RAW.ORDERS
+--     from ECOMMERCE_DB.RAW.ORDER_ITEMS
 -- )
 --
 -- select
+--     order_item_id,
 --     order_id,
---     customer_id,
---     order_date,
---     status
+--     product_id,
+--     quantity,
+--     unit_price,
+--     line_total
 -- from source_data
