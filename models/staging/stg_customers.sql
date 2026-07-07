@@ -13,5 +13,5 @@ select
     quantity,
     unit_price,
     line_total,
-    discount_amount
+    PRODUCT_ID
 from source_data
