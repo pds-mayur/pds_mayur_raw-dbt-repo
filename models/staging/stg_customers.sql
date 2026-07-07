@@ -1,13 +1,12 @@
--- This file generates a Snowflake SQL compilation error because the SELECT list
--- contains an incomplete expression before `FROM`. Snowflake reports
--- `unexpected 'FROM'`.
-
-with source_data as (
-    select *
-    from ECOMMERCE_DB.RAW.CUSTOMERS
-)
-
+-- This file generates a dbt compilation error caused by an undefined Jinja variable.
+-- Expected dbt message: Undefined variable.
+-- Cause: missing variable in the Jinja context.
+-- AI fix: excellent candidate.
+--
+-- The Jinja expression below is intentionally invalid so dbt fails before SQL
+-- reaches Snowflake.
 select
     customer_id,
-    name +
-from source_data;
+    order_id,
+    {{ missing_var }} as problematic_value
+from ECOMMERCE_DB.RAW.ORDERS
