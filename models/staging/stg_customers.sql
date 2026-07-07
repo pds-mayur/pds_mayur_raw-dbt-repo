@@ -8,7 +8,7 @@ with source_data as (
 
 cleaned_products as (
     select
-        product_id
+        product_id,
         trim(product_name) as product_name,
         category,
         unit_price
