@@ -1,19 +1,12 @@
 -- This file generates a Snowflake SQL compilation error because the SELECT list
--- is missing a comma after `product_id`. Snowflake will usually report
--- `syntax error ... unexpected ')'` or a similar parse error.
+-- ends with a trailing comma before `from`. Snowflake typically reports
+-- `unexpected 'FROM'`.
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.PRODUCTS
-),
-
-cleaned_products as (
-    select
-        product_id
-        trim(product_name) as product_name,
-        category,
-        unit_price
-    from source_data
+    from ECOMMERCE_DB.RAW.CUSTOMERS
 )
 
-select *
-from cleaned_products
+select
+    customer_id,
+    name,
+from source_data
