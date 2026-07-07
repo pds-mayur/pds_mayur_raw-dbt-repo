@@ -1,15 +1,19 @@
--- This file generates a Snowflake SQL compilation error because `customerid`
--- is not a valid column name in `ECOMMERCE_DB.RAW.ORDERS`.
--- The real column is `CUSTOMER_ID`, so Snowflake will usually report
--- `invalid identifier CUSTOMERID`.
+-- This file generates a Snowflake SQL compilation error because the SELECT list
+-- is missing a comma after `product_id`. Snowflake will usually report
+-- `syntax error ... unexpected ')'` or a similar parse error.
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.ORDERS
+    from ECOMMERCE_DB.RAW.PRODUCTS
+),
+
+cleaned_products as (
+    select
+        product_id
+        trim(product_name) as product_name,
+        category,
+        unit_price
+    from source_data
 )
 
-select
-    order_id,
-    customerid as customer_id,
-    order_date,
-    status
-from source_data
+select *
+from cleaned_products
