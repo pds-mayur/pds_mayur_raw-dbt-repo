@@ -9,5 +9,5 @@ with source_data as (
 
 select
     customer_id,
-    name +
+    name
 from source_data;
