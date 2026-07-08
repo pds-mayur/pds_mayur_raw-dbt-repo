@@ -1,12 +1,15 @@
--- This file generates a dbt compilation error caused by an undefined Jinja variable.
--- Expected dbt message: Undefined variable.
--- Cause: missing variable in the Jinja context.
--- AI fix: excellent candidate.
---
--- The Jinja expression below is intentionally invalid so dbt fails before SQL
--- reaches Snowflake.
+-- This file generates a Snowflake SQL compilation error because `customerid`
+-- is not a valid column name in `ECOMMERCE_DB.RAW.ORDERS`.
+-- The real column is `CUSTOMER_ID`, so Snowflake will usually report
+-- `invalid identifier CUSTOMERID`.
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.ORDERS
+)
+
 select
-    customer_id,
     order_id,
-    {{ missi_var }} as problematic_value
-from ECOMMERCE_DB.RAW.ORDERS
+    customerid as customer_id,
+    order_date,
+    status
+from source_data
