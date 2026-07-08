@@ -1,5 +1,6 @@
--- This file generates a dbt compilation error caused by an undefined Jinja variable.
--- Expected dbt message: Undefined variable.
+-- This file generates a dbt compilation error because `env` is undefined.
+-- Expected dbt message: `'env' is undefined`.
+-- Expected snippet: env is undefined.
 -- Cause: missing variable in the Jinja context.
 -- AI fix: excellent candidate.
 --
@@ -8,5 +9,5 @@
 select
     customer_id,
     order_id,
-    {{ missing_var }} as problematic_value
+    {{ env['DBT_FILTER'] }} as filter_value
 from ECOMMERCE_DB.RAW.ORDERS
