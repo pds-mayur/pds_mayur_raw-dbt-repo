@@ -3,10 +3,7 @@
 -- Cause: missing variable in the Jinja context.
 -- AI fix: excellent candidate.
 --
--- The Jinja expression below is intentionally invalid so dbt fails before SQL
--- reaches Snowflake.
 select
     customer_id,
-    order_id,
-    {{ missing_var }} as problematic_value
+    order_id
 from ECOMMERCE_DB.RAW.ORDERS
