@@ -7,6 +7,5 @@
 -- reaches Snowflake.
 select
     customer_id,
-    order_id,
-    {{ missi_var }} as problematic_value
+    order_id
 from ECOMMERCE_DB.RAW.ORDERS
