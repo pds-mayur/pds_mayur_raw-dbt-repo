@@ -1,6 +1,6 @@
 with source_data as (
     select *
-    from MISSING_DB.RAW.PAYMENTS
+    from VALID_DB.RAW.PAYMENTS
 )
 
 select *
