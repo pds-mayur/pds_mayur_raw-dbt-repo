@@ -4,10 +4,9 @@
 -- Snowflake will usually report `table XYZ does not exist`.
 -- Possible reasons: upstream model failed, wrong database, wrong schema,
 -- or the object was dropped.
--- AI can: detect dependency, rebuild upstream, suggest correct schema.
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.PRODUCTS_XYZ
+    from ECOMMERCE_DB.RAW.table_xyz -- Updated to indicate the correct table name
 )
 
 select *
