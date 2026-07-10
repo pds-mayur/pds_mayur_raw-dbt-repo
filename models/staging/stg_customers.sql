@@ -9,7 +9,7 @@ with source_data as (
 
 select
     order_id,
-    customerid as customer_id,
+    customerid,
     order_date,
     status
 from source_data
