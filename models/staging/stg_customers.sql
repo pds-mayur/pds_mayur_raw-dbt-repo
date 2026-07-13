@@ -1,19 +1,16 @@
--- models/staging/stg_customers_insufficient.sql
+-- models/staging/stg_customers_exceed.sql
 {{ config(
     warehouse='COMPUTE_WH',
     materialized='table'
 ) }}
 
-with source_data as (
-    select *
-    from ECOMMERCE_DB.RAW.CUSTOMERS
-    cross join ECOMMERCE_DB.RAW.CUSTOMERS c2
-    cross join ECOMMERCE_DB.RAW.CUSTOMERS c3
+with recursive numbers as (
+    select 1 as n
+    union all
+    select n + 1 from numbers where n < 10000000
 )
 select 
     s.*,
-    c2.CUSTOMER_ID as c2_id,
-    c3.CUSTOMER_ID as c3_id
+    n
 from ECOMMERCE_DB.RAW.CUSTOMERS s
-cross join ECOMMERCE_DB.RAW.CUSTOMERS c2
-cross join ECOMMERCE_DB.RAW.CUSTOMERS c3
+cross join numbers
