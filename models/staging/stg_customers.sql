@@ -1,7 +1,9 @@
+-- models/error_warehouse_suspended.sql
+{{ config(warehouse='COMPUTE_WH') }}
+
 with source_data as (
     select *
-    from MISSING_DB.RAW.PAYMENTS
+    from ECOMMERCE_DB.RAW.CUSTOMERS
 )
-
 select *
 from source_data
