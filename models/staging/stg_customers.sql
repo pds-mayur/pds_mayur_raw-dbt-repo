@@ -1,16 +1,11 @@
--- models/staging/stg_customers_exceed.sql
-{{ config(
-    warehouse='COMPUTE_WH',
-    materialized='table'
-) }}
-
-with recursive numbers as (
-    select 1 as n
-    union all
-    select n + 1 from numbers where n < 10000000
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.ORDERS
 )
-select 
-    s.*,
-    n
-from ECOMMERCE_DB.RAW.CUSTOMERS s
-cross join numbers
+
+select
+    order_id,
+    customer_id,
+    order_date,
+    status
+from source_data
