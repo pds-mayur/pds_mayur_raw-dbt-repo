@@ -1,11 +1,7 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.ORDERS
+    from ECOMMERCE_DB.RAW.CUSTOMERS_MISSING
 )
 
-select
-    order_id,
-    customerid,
-    order_date,
-    status
+select *
 from source_data
