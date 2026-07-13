@@ -1,13 +1,13 @@
--- models/staging/stg_customers_missing.sql
+-- models/staging/stg_customers.sql
 {{
   config(
-    warehouse='NON_EXISTENT_WH',
+    warehouse='DBT_WH',
     materialized='table'
   )
 }}
 
 -- Force the warehouse switch
-{% do run_query("USE WAREHOUSE NON_EXISTENT_WH") %}
+{% do run_query("USE WAREHOUSE DBT_WH") %}
 
 with source_data as (
     select *
