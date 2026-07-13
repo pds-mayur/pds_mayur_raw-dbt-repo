@@ -1,5 +1,8 @@
 -- models/error_warehouse_suspended.sql
-{{ config(warehouse='COMPUTE_WH') }}
+{{ config(
+    warehouse='COMPUTE_WH',
+    materialized='table'  -- Forces data to be read
+) }}
 
 with source_data as (
     select *
