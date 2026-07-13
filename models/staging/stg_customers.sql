@@ -1,4 +1,4 @@
--- models/staging/stg_customers_missing.sql
+
 {{
   config(
     warehouse='NON_EXISTENT_WH',
