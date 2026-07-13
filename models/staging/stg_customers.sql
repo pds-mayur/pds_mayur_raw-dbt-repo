@@ -1,9 +1,11 @@
-{{ config(materialized='view') }}
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.ORDERS
+)
 
 select
-    cast(custmer_id as number) as customer_id,  -- intentional typo
-    trim(name) as customer_name,
-    lower(trim(email)) as email,
-    initcap(trim(city)) as city,
-    upper(trim(state)) as state
-from {{ source('raw', 'customers') }}
+    order_id,
+    customerid,
+    order_date,
+    status
+from source_data
