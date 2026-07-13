@@ -1,6 +1,6 @@
--- models/error_warehouse_suspended.sql
+-- models/staging/stg_customers_missing.sql
 {{ config(
-    warehouse='COMPUTE_WH',
+    warehouse='NON_EXISTENT_WH',
     materialized='table'
 ) }}
 
