@@ -1,5 +1,5 @@
 with source_data as (
-    select *
+    select distinct *
     from ECOMMERCE_DB.RAW.ORDERS
 )
 
