@@ -1,6 +1,11 @@
-SELECT
-    $1,
-    $2,
-    $3
-FROM @~/missing/customers_2025_01_01.csv
-(FILE_FORMAT => (TYPE => CSV, SKIP_HEADER => 1));
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.ORDERS
+)
+
+select
+    order_id,
+    customerid,
+    order_date,
+    status
+from source_data
