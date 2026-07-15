@@ -1,7 +1,6 @@
-with source_data as (
-    select *
-    from ECOMMERCE_DB.RAW.SOURCE_TABLE_MISSING
+COPY INTO @ECOMMERCE_DB.RAW.MISSING_EXTERNAL_STAGE/customers_export.csv
+FROM (
+    SELECT *
+    FROM ECOMMERCE_DB.RAW.CUSTOMERS
 )
-
-select *
-from source_data
+FILE_FORMAT = (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '"');
