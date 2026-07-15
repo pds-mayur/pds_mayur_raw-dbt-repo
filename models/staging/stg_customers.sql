@@ -1,16 +1,7 @@
-{{
-  config(
-    warehouse='NON_EXISTENT_WH',
-    materialized='table'
-  )
-}}
-
--- Force the warehouse switch
-{% do run_query("USE WAREHOUSE NON_EXISTENT_WH") %}
-
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.CUSTOMERS
+    from ECOMMERCE_DB.RAW.SOURCE_TABLE_MISSING
 )
+
 select *
 from source_data
