@@ -1,12 +1,9 @@
 {{
   config(
-    warehouse='NON_EXISTENT_WH',
+    warehouse='YOUR_EXISTING_WAREHOUSE',
     materialized='table'
   )
 }}
-
--- Force the warehouse switch
-{% do run_query("USE WAREHOUSE NON_EXISTENT_WH") %}
 
 with source_data as (
     select *
