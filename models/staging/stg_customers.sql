@@ -1,6 +1,6 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.SOURCE_TABLE_MISSING
+    from ECOMMERCE_DB.RAW.CUSTOMERS
 )
 
 select *
