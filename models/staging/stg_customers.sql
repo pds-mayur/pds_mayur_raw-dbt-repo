@@ -10,5 +10,6 @@ select
     quantity,
     unit_price,
     line_total,
-    discount_amount
+    discount_amount,
+    NULLIF(quantity, 0) as safe_quantity
 from source_data
