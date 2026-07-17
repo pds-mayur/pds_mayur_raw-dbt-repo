@@ -1,7 +1,12 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.MISSING_SCHEMA.ORDER_ITEMS
+    from ECOMMERCE_DB.RAW.ORDERS
 )
 
-select *
+select
+    order_id,
+    customer_id,
+    order_date,
+    status,
+    1 / 0 AS loaded_at
 from source_data
