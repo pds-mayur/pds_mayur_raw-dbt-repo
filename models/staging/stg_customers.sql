@@ -10,7 +10,8 @@ cleaned_orders as (
         customer_id,
         order_date,
         status,
-        cast(status as number(10,2)) as loaded_at
+        cast(status as number(10,2)) as loaded_at,
+        NULLIF(cast(status as number(10,2)), 0) as safe_status
     from source_data
 )
 
