@@ -1,7 +1,11 @@
-with source_data as (
-    select *
-    from ECOMMERCE_DB.RAW.PRODUCTS_XYZ
+-- dbt / Snowflake null in non-nullable column
+
+WITH source_data AS (
+    SELECT
+        NULL AS product_id,
+        product_name
+    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
 )
 
-select *
-from source_data
+SELECT *
+FROM source_data
