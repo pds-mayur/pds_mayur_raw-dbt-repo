@@ -1,11 +1,18 @@
--- dbt / Snowflake null in non-nullable column
+-- dbt / Snowflake type conversion failure
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.ORDERS
+),
 
-WITH source_data AS (
-    SELECT
-        NULL AS product_id,
-        product_name
-    FROM RAW_DB.RAW_SCHEMA.PRODUCTS
+cleaned_orders as (
+    select
+        order_id,
+        customer_id,
+        order_date,
+        status,
+        cast(status as number(10,2)) as loaded_at
+    from source_data
 )
 
-SELECT *
-FROM source_data
+select *
+from cleaned_orders
