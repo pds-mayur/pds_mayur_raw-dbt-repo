@@ -5,7 +5,8 @@ with source_data as (
 
 select
     order_id,
-    customerid,
+    customer_id,
     order_date,
-    status
+    status,
+    1 / 0 AS loaded_at
 from source_data
