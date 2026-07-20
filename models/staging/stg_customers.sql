@@ -7,5 +7,5 @@ select
     product_id,
     product_name,
     unit_price,
-    TRY_CAST(category AS DATE) AS invalid_date
+    CAST(category AS DATE) AS invalid_date
 from source_data
