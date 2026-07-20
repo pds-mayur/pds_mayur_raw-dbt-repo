@@ -6,6 +6,5 @@ with source_data as (
 select
     product_id,
     product_name,
-    unit_price,
-    CAST(category AS DATE) AS invalid_date
+    unit_price
 from source_data
