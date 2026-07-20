@@ -1,12 +1,12 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.ORDERS
+    from ECOMMERCE_DB.RAW.PRODUCTS
 )
 
 select
-    order_id,
-    customer_id,
-    order_date,
-    status,
-    1 / 0 AS loaded_at
+    product_id,
+    product_name,
+    unit_price,
+    TRY_CAST(category AS DATE) AS invalid_date, 
+    created_at
 from source_data
