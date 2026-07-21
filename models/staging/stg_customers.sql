@@ -1,7 +1,14 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.PRODUCTS_XYZ
+    from ECOMMERCE_DB.RAW.ORDER_ITEMS
 )
 
-select *
+select
+    order_item_id,
+    order_id,
+    product_id,
+    quantity,
+    unit_price,
+    line_total,
+    discount_amount
 from source_data
