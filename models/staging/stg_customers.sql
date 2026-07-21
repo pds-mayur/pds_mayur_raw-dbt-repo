@@ -1,14 +1,15 @@
+-- models/products.sql
+-- Trying to cast a string column to date that contains invalid values
+-- Will fail if description has non-date values
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.ORDER_ITEMS
+    from ECOMMERCE_DB.RAW.PRODUCTS
 )
 
 select
-    order_item_id,
-    order_id,
     product_id,
-    quantity,
+    product_name,
     unit_price,
-    line_total,
-    discount_amount
+    TRY_CAST(category AS DATE) AS invalid_date, 
+    created_at
 from source_data
