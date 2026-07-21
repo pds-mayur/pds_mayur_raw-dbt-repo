@@ -9,6 +9,5 @@ select
     product_id,
     quantity,
     unit_price,
-    line_total,
-    discount_amount
+    line_total
 from source_data
