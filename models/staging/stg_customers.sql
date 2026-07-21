@@ -1,11 +1,7 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.PRODUCTS
+    from ECOMMERCE_DB.RAW.PRODUCTS_XYZ
 )
 
-select
-    product_id,
-    product_name,
-    unit_price,
-    CAST(category AS DATE) AS invalid_date
+select *
 from source_data
