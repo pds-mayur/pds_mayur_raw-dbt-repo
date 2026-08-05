@@ -2,7 +2,7 @@
 
 select
     null as order_id,
-    customerid,
+    customer_id,
     order_date,
     status
 from {{ source('raw', 'orders') }}
