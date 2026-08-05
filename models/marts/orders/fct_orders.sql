@@ -6,4 +6,3 @@ select
     order_date,
     status
 from {{ source('raw', 'orders') }}
-limit 128
