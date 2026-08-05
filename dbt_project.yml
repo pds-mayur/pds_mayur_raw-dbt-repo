@@ -1,4 +1,4 @@
-name: "real_time_project"
+name: "pipelinewerks"
 version: "1.0.0"
 config-version: 2
 
@@ -8,7 +8,7 @@ model-paths: ["models"]
 macro-paths: ["macros"]
 
 models:
-  real_time_project:
+  pipelinewerks:
     staging:
       +materialized: view
     marts:
