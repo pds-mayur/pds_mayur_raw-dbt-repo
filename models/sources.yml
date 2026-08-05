@@ -9,3 +9,4 @@ sources:
       - name: order_items
       - name: payments
       - name: products
+      - name: ERP_ORDERS
