@@ -1,8 +1,11 @@
-{{ config(materialized='table') }}
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.ORDERS
+)
 
 select
-    null as order_id,
-    customer_id,
+    order_id,
+    customerid,
     order_date,
     status
-from {{ source('raw', 'orders') }}
+from source_data
