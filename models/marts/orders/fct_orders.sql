@@ -1,6 +1,6 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.CUSTERS_MISS
+    from ECOMMEE_DB.RAW.CUSTERS_MISS
 )
 
 select *
