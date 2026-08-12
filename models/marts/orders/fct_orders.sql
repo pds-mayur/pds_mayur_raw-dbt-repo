@@ -1,6 +1,10 @@
+{{ config(materialized='view') }}
+
 with source_data as (
+
     select *
-    from ECOMMEE_DB.RAW.CUSTERS_MISS
+    from {{ source('stripe', 'orders') }}
+
 )
 
 select *
