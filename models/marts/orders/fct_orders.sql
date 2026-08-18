@@ -1,6 +1,6 @@
 with source_data as (
     select *
-    from ECOMMERCE_DB.RAW.ORDE
+    from ECOMRCE_DB.RAW.ORDERS
 )
 
 select
