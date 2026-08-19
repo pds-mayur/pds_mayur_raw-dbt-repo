@@ -6,6 +6,6 @@ with source_data as (
 select
     order_id,
     customer_id,
-    orderdate,
+    ORDER_DATE,
     status
 from source_data
