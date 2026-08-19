@@ -5,7 +5,7 @@ with source_data as (
 
 select
     order_id,
-    customerid,
+    CUSTOMER_ID,
     order_date,
     status
 from source_data
