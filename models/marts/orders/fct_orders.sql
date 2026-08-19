@@ -9,4 +9,4 @@ from values
     (NULL, 103),
     (NULL, 104),
     (3, 105),
-    (NULL, 106);
+    (NULL, 106)
