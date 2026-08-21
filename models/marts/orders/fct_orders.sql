@@ -1,11 +1,7 @@
 with source_data as (
     select *
-    from {{ ref('customers_root_failure') }}
+    from ECOMMERCE_DB.MISSING_SCHEMA.ORDER_ITEMS
 )
 
-select
-    order_id,
-    customer_id,
-    order_date,
-    status
+select *
 from source_data
