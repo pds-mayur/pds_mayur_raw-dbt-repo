@@ -7,5 +7,5 @@ select
     order_id,
     customer_id,
     order_date,
-    stats
+    STATUS
 from source_data
