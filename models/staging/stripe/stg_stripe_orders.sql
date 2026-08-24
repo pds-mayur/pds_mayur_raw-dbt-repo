@@ -1,10 +1,6 @@
-{{ config(materialized='view') }}
-
 with source_data as (
-
     select *
-    from {{ source('stripe', 'orders') }}
-
+    from MISSING_DB.RAW.PAYMENTS
 )
 
 select *
