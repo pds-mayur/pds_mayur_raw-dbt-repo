@@ -8,7 +8,7 @@ jobs:
         - intensity_electrified  # Triggered after 'landing' connection completes sync
     steps:
       - name: run daily models
-        command: dbt run --select +tag:daily
+        command: dbt run
 
   # - name: Weekly-3am
   #   schedule:
