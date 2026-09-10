@@ -1,0 +1,19 @@
+# deployment.yml
+
+jobs:
+  - name: daily-after-landing
+    schedule:
+      type: integrated
+      integrations:
+        - intensity_electrified  # Triggered after 'landing' connection completes sync
+    steps:
+      - name: run daily models
+        command: dbt run --select +tag:daily
+
+  # - name: Weekly-3am
+  #   schedule:
+  #     type: cron
+  #     entries: ["0 3 * * 0"]  # Runs 3 AM every Sunday
+  #   steps:
+  #     - name: run weekly models
+  #       command: dbt run --select +tag:weekly
