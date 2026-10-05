@@ -1,6 +1,6 @@
 with source_data as (
     select *
-    from FIVETRAN_TEST.public.ORDERS
+    from "FIVETRAN_TEST"."public"."orders"
 )
 
 select
