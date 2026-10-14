@@ -4,7 +4,7 @@ with source_data as (
 )
 
 select
-    "order_id_0810",
+    "order_id_0810wq",
     "customer_id",
     "order_date"
 from source_data
