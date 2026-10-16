@@ -1,0 +1,58 @@
+# Incident remediation: `bd8f6195-7716-4c7b-83e0-c79cdd49d623`
+
+## RCA summary
+SQL error due to unrecognized date format
+
+## Confidence score
+0.9
+
+## Validation
+- Patch scope validated: **False**
+
+### Recommended steps
+- manual_review_required
+- Review the suggested dbt/Jinja correction in remediation.md
+- Confirm the variable/default value with the project owner
+- Apply the SQL change manually after review
+- Run dbt build --select affected_model
+
+## Suggested correction for review
+
+### Unhandled dbt error needs review
+Target file: `models/staging/stg_customers.sql`
+
+The current project rules do not have a confident automated fix for this failure. No automatic SQL patch was generated. Review the full dbt run result, compiled SQL, and live Snowflake context, then patch only after the root cause is confirmed. Primary dbt error: Date 'Home' is not recognized | select * from ecommerce_db.dbt_170726.stg_customers;.
+
+```sql
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.PRODUCTS
+)
+
+select
+    product_id,
+    product_name,
+    unit_price,
+    CAST(category AS DATE) AS invalid_date
+from source_data
+```
+
+### Possible reviewed patches
+
+#### Review the current model SQL
+Use this as the starting point for a human-reviewed fix; no automatic SQL edit was considered safe.
+```sql
+with source_data as (
+    select *
+    from ECOMMERCE_DB.RAW.PRODUCTS
+)
+
+select
+    product_id,
+    product_name,
+    unit_price,
+    CAST(category AS DATE) AS invalid_date
+from source_data
+```
+
+## Proposed patches
